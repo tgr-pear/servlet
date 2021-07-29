@@ -1,0 +1,36 @@
+// 게시글 보기
+	 public static BoardDto content_view(String board_idx) {
+		 BoardDto board_dto = null;
+		 
+		 Connection conn = null; // DB연결 클래스 
+		 ResultSet rs = null; // 검색 결과를 담는 클래스
+		 PreparedStatement pstmt = null; // 매개변수 입력을 고려한 State 클래스
+
+		try {
+			conn = DBConnection.getConnection();
+			
+			// String query = "SELECT * FROM board WHERE board_idx=?";
+			  // System.out.println( "BoardDao_content_view query : " +  query );
+			pstmt = conn.prepareStatement( "SELECT * FROM board WHERE board_idx='" + board_idx.trim() +"'" );
+			
+			// int index = Integer.parseInt( board_idx.trim() ); 
+			// pstmt.setInt( 1, index );
+			  // System.out.println( "BoardDao_content_view board_idx : " +  board_idx );
+			rs = pstmt.executeQuery();
+			  System.out.println( "rs : " + rs );
+			
+			while( rs.next() ) {
+				int board_idx_int = rs.getInt( "board_idx" );
+				String board_name = rs.getString( "board_name" );
+				String board_title = rs.getString( "board_title" );
+				String board_content = rs.getString( "board_content" );
+				Date board_date = rs.getDate( "board_date" );
+				int board_hit = rs.getInt( "board_hit" );
+				
+				board_dto = new BoardDto( board_idx_int, board_name, board_title, board_content, board_date, board_hit );
+			}
+		} catch( Exception e ) {
+			e.printStackTrace();
+		}
+		return board_dto;
+	 }
