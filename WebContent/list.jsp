@@ -55,7 +55,7 @@
 	  <tr>
 	    <td> ${ board_dto.board_idx }</td>
 	    <td> ${ board_dto.board_name }</td>
-	    <td><a href="content_view.do?board_idx = ${ board_dto.board_idx }" >${ board_dto.board_title }</a></td>
+	    <td><a href="content_view.do?board_idx=${ board_dto.board_idx }" >${ board_dto.board_title }</a></td>
 	    <fmt:formatDate value="${ board_dto.board_date }" pattern = "yyyy-MM-dd HH:mm:ss" var = "board_date" />
 	    <td> ${ board_dto.board_date }</td>
 	    <td> ${ board_dto.board_hit }</td>
